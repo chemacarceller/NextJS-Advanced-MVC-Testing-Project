@@ -1,6 +1,9 @@
 'use client';
+
+import '@/app/error.css';
+import ErrorScript from "./error.js";
 import Script from 'next/script'; 
-import './error.css';
+import { useEffect } from 'react';
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -9,18 +12,22 @@ interface ErrorProps {
 
 export default function Page({ error, reset }: ErrorProps) {
 
+  useEffect(() => {
+    
+    const cleanup = ErrorScript({ error, reset }); 
+
+    return () => { 
+      if (typeof cleanup === 'function') { (cleanup as Function)(); }
+    };
+  });
+
   const cause = error.cause as { statusCode?: number } | undefined;
 
   const errorCode = cause?.statusCode || 500;
-  const message = error.message || "Ha ocurrido un error inesperado.";
+  const message = error.message || "An unexpected error has occurred.";
 
   return (
     <>
-    <Script 
-        src="/js/error.js" 
-        strategy="afterInteractive"
-        onLoad={() => console.log('El script cliente se cargó con éxito')}
-    />
     <div className="error-layout">
       <h1 className="error-titulo">Error {errorCode}</h1>
       <p className="error-texto">{message}</p>

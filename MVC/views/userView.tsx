@@ -1,8 +1,9 @@
 "use client";
 
+import '@/app/users/users.css';
+import { UserScript } from '@/app/users/users.js';
 import { UserModel } from "../models/userModel";
-import Script from 'next/script';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface UserViewProps {
   usersList: UserModel[];
@@ -11,22 +12,17 @@ interface UserViewProps {
 
 export function UserView({ usersList, title }: UserViewProps) {
 
-  const [version, setVersion] = useState('');
+ useEffect(() => {
+    
+    const cleanup = UserScript();
 
-  useEffect(() => {
-    // Al entrar a la página (incluso volviendo de Home), generamos un número único
-    setVersion(Date.now().toString());
-  }, []);
-
+    return () => { 
+      if (typeof cleanup === 'function') { (cleanup as Function)(); }
+    };
+  });
+  
   return (
     <>
-      {version && (
-        <Script 
-          src={`/js/users.js?v=${version}`} 
-          strategy="lazyOnload" 
-        />
-      )}
-      
       <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
         <h1>{title}</h1>
         <p>Team member management : </p>

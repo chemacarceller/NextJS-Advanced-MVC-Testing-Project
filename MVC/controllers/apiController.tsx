@@ -2,6 +2,8 @@ import { UserService } from "../services/userService";
 
 export class ApiController {
 
+  private userService: UserService; 
+
   constructor() {
     this.userService = new UserService();
     this.listUsers = this.listUsers.bind(this);
@@ -14,7 +16,8 @@ export class ApiController {
       return Response.json({ success: true, data: users });
 
     } catch (error) {
-      console.error("Error en ApiController:", error);
+      const message = error instanceof Error ? error.message : String(error);
+      throw new Error(message); 
     }
   }
 }

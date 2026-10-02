@@ -1,10 +1,6 @@
+export const dynamic = 'force-dynamic'; 
+
 export default function Page() {
-
-  throw new Error("⚠️ Este es un error de prueba simulado en Next.js");
-
-  return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold">Página de Prueba</h1>
-    </div>
-  );
+  throw new Error("⚠️ This is a simulated test error in Next.js");
+  return <></>; 
 }

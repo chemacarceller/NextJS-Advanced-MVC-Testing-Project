@@ -1,9 +1,11 @@
-(function () {
+export function UserScript() {
 
     const btnToggle = document.getElementById('btn-toggle-status');
     const usersContainer = document.getElementById('users-container');
 
     btnToggle.addEventListener('click', async () => {
+
+        console.log("Testing UserScript " + + Math.floor(Math.random() * 100000));
 
         // Read the current state from the data attribute
         const showingActive = btnToggle.getAttribute('data-showing-active') === 'true';
@@ -41,4 +43,4 @@
             console.error('Error performing the AJAX request : ', error);
         }
     });
-})();
+}

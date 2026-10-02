@@ -6,7 +6,7 @@ import './layout.css';
 
 export const metadata: Metadata = {
   title: 'My Testing Web Site',
-  description: 'Sitio web de pruebas',
+  description: 'Testing website',
 };
 
 interface RootLayoutProps {
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="es">
       <body>
-        <Script src="/js/layout.js" strategy="afterInteractive" />
+        <Script src="js/layout.js" strategy="afterInteractive" />
         <nav><Link href="/">Home</Link>&nbsp;&nbsp;&nbsp;<Link href="/users">Users</Link>&nbsp;&nbsp;&nbsp;<Link href="/speechAI">Speech-AI</Link></nav>
         <main>
           {children}

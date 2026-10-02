@@ -2,6 +2,8 @@ import { UserRepository } from "../repositories/userRepository";
 
 export class UserService {
 
+  private userRepository: UserRepository; 
+
   constructor() {
     this.userRepository = new UserRepository();
     this.getUsersForList = this.getUsersForList.bind(this);
@@ -12,7 +14,7 @@ export class UserService {
     try {
 
       // Request the data from the repository
-      const users = await this.userRepository.findAll(activeUser);
+      const users : any[] = await this.userRepository.findAll(activeUser) as any[];
       
       // Validations
       if (!users || users.length === 0) {

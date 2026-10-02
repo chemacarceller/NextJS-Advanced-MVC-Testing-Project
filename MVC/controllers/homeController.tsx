@@ -1,6 +1,6 @@
-import { SpeechAIView } from "../views/speechAIView";
+import { HomeView } from "../views/homeView";
 
-export class SpeechAIController {
+export class HomeController {
 
   constructor() {
     this.start = this.start.bind(this);
@@ -10,7 +10,7 @@ export class SpeechAIController {
 
     try {
 
-      return <SpeechAIView title="SpeechAI - My Testing Speech for AI" />;
+      return <HomeView title="My Testing Web Page" message="Welcome to my site!"/>;
 
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);

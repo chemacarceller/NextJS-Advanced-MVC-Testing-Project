@@ -13,20 +13,7 @@ const mockUsers = [
 export class UserRepository {
 
   constructor() {
-    this.findById = this.findById.bind(this);
     this.findAll = this.findAll.bind(this);
-  }
-
-  async findById(id) {
-
-    // Returns the data found by ID.
-    return new Promise((resolve) => {
-
-      setTimeout(() => {
-        const u = mockUsers.find(u => u.id === id);
-        resolve(u ? { ...new UserModel(u.id, u.name, u.email, u.status, u.role) } : null);
-      }, 50);
-    });
   }
 
   async findAll(activeUser = true) {

@@ -1,41 +1,40 @@
 "use client";
 
+import '@/app/speechAI/speechAI.css';
+import { SpeechAIScript } from '@/app/speechAI/speechAI.js';
+import { useEffect } from 'react';
 import Script from 'next/script';
-import { useState, useEffect } from 'react';
+
 
 export function SpeechAIView({ title }: { title: string }) {
 
-  const [version, setVersion] = useState('');
-
   useEffect(() => {
-    setVersion(Date.now().toString());
-  }, []);
+    
+    const cleanup = SpeechAIScript();
+
+    return () => { 
+      if (typeof cleanup === 'function') { (cleanup as Function)(); }
+    };
+  });
 
   return (
-    <>
-      {version && (
-        <Script 
-          src={`/js/speechAI.js?v=${version}`} 
-          strategy="lazyOnload" 
-        />
-      )}
-      
+    <>      
       <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-        <div class="contenedor">
+        <div className="contenedor">
           <h2>Speech to Text AI</h2>
-          <p>Presiona el botón para empezar a hablar y rellenar el campo de texto.</p>
+          <p>Press the button to start speaking and fill in the text field</p>
 
-          <div class="voice-container">
-            <textarea id="texto-resultado" placeholder="Tu texto dictado aparecerá aquí..." rows="8" cols="128"></textarea>
-            <button id="btn-microfono" class="btn-mic">
-              🎙️ <span id="estado-mic">Iniciar Dictado</span>
+          <div className="voice-container">
+            <textarea id="texto-resultado" placeholder="Your dictated text will appear here..." rows={8} cols={128} maxLength={976}></textarea>
+            <button id="btn-microfono" className="btn-mic">
+              🎙️ <span id="estado-mic">Start Dictation</span>
             </button>
           </div>
           <h2>Text to Speech AI</h2>
-          <p>Rellena el campo de texto y escucha el resultado</p>
+          <p>Fill in the text field and listen to the result</p>
 
-          <div class="voice-container">
-            <textarea id="texto-resultado" placeholder="Rellena el campo de texto aquí para escuchar el resultado..." rows="8" cols="128"></textarea>
+          <div className="voice-container">
+            <textarea id="texto-resultado" placeholder="Fill in the text field here to hear the result..." rows={8} cols={128} maxLength={976}></textarea>
           </div>
         </div>
       </main>
