@@ -7,7 +7,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-export default function ErrorPage({ error, reset }: ErrorProps) {
+export default function Page({ error, reset }: ErrorProps) {
 
   const cause = error.cause as { statusCode?: number } | undefined;
 

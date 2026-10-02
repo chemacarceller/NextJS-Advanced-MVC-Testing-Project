@@ -1,15 +1,18 @@
-export interface Usuario {
-  id: number;
-  nombre: string;
-  rol: string;
-}
+// Application entity class related to users
+export class UserModel {
 
-const usuariosBD: Usuario[] = [
-  { id: 1, nombre: "Ana López", rol: "Administrador" },
-  { id: 2, nombre: "Carlos Gómez", rol: "Editor" },
-  { id: 3, nombre: "Elena Rivas", rol: "Usuario" }
-];
+    constructor( id = null, name, email, status, role ) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.status = status;
+        this.role = role;
+    }
 
-export async function getAllUsers(): Promise<Usuario[]> {
-  return usuariosBD;
+    changeEmail(newEmail) {
+        if (!newEmail.includes('@')) {
+            throw new Error("The email format is invalid");
+        }
+        this.email = newEmail;
+    }
 }

@@ -2,7 +2,7 @@
 
 import ErrorPage from '../error';
 
-export default function ForzarErrorPage() {
+export default function Page() {
 
   const mockError = new Error('Oops! This is an error triggered for testing purposes.');
   Object.assign(mockError, { cause: { statusCode: 500 } });

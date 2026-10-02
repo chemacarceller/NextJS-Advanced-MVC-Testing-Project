@@ -1,0 +1,44 @@
+"use client";
+
+import Script from 'next/script';
+import { useState, useEffect } from 'react';
+
+export function SpeechAIView({ title }: { title: string }) {
+
+  const [version, setVersion] = useState('');
+
+  useEffect(() => {
+    setVersion(Date.now().toString());
+  }, []);
+
+  return (
+    <>
+      {version && (
+        <Script 
+          src={`/js/speechAI.js?v=${version}`} 
+          strategy="lazyOnload" 
+        />
+      )}
+      
+      <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+        <div class="contenedor">
+          <h2>Speech to Text AI</h2>
+          <p>Presiona el botón para empezar a hablar y rellenar el campo de texto.</p>
+
+          <div class="voice-container">
+            <textarea id="texto-resultado" placeholder="Tu texto dictado aparecerá aquí..." rows="8" cols="128"></textarea>
+            <button id="btn-microfono" class="btn-mic">
+              🎙️ <span id="estado-mic">Iniciar Dictado</span>
+            </button>
+          </div>
+          <h2>Text to Speech AI</h2>
+          <p>Rellena el campo de texto y escucha el resultado</p>
+
+          <div class="voice-container">
+            <textarea id="texto-resultado" placeholder="Rellena el campo de texto aquí para escuchar el resultado..." rows="8" cols="128"></textarea>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}

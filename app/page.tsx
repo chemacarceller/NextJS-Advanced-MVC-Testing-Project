@@ -1,7 +1,7 @@
 import Script from 'next/script'; 
 import './index.css';
 
-export default function HomePage() {
+export default function Page() {
   const message = "¡Bienvenido a mi sitio!";
 
   return (

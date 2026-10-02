@@ -1,11 +1,29 @@
-import * as userModel from "../models/userModel";
+import { UserService } from "../services/userService";
 import { UserView } from "../views/userView";
 
-export async function userController() {
+export class UserController {
 
-  const listaUsuarios = await userModel.getAllUsers();
+  constructor() {
+    this.userService = new UserService();
+    this.listUsers = this.listUsers.bind(this);
+  }
 
-  const tituloPagina = `Panel de Usuarios (${listaUsuarios.length})`;
+  async listUsers() {
 
-  return <UserView usuarios={listaUsuarios} titulo={tituloPagina} />;
+    try {
+      
+      const users = await this.userService.getUsersForList();
+
+      const plainUsers = JSON.parse(JSON.stringify(users));
+
+      
+      return <UserView usersList={plainUsers} title="User List" />;
+
+    } catch (error) {
+
+      console.error("Error en UserController:", error);
+      
+      return <p style={{ fontFamily: 'sans-serif' }}>Error al cargar los usuarios.</p>;
+    }
+  }
 }

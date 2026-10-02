@@ -2,7 +2,7 @@
 
 import ErrorPage from './error';
 
-export default function NotFound() {
+export default function Page() {
   
   const mockError = new Error("La página solicitada no existe.");
   Object.assign(mockError, { cause: { statusCode: 404 } });

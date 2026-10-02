@@ -1,5 +1,5 @@
-import { userController } from "@/MVC/controllers/userController";
+import { UserController } from "@/MVC/controllers/userController";
 
-export default async function UsuariosPage() {
-  return await userController();
+export default async function Page() {
+  return await new UserController().listUsers();
 }

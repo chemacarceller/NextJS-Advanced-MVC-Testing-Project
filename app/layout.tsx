@@ -18,9 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="es">
       <body>
         <Script src="/js/layout.js" strategy="afterInteractive" />
-        <nav>
-          <Link href="/">Home</Link>
-        </nav>
+        <nav><Link href="/">Home</Link>&nbsp;&nbsp;&nbsp;<Link href="/users">Users</Link>&nbsp;&nbsp;&nbsp;<Link href="/speechAI">Speech-AI</Link></nav>
         <main>
           {children}
         </main>
