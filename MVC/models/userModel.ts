@@ -5,7 +5,7 @@ export class UserModel {
   public status: string | null = null;
   public role: string | null = null;
 
-  constructor( name: string | null, email: string | null, status: string | null, role: string | null, id: string | null = null ) {
+  constructor( id: string | null = null, name: string | null, email: string | null, status: string | null, role: string | null ) {
     this.id = id;
     this.name = name;
     this.email = email;

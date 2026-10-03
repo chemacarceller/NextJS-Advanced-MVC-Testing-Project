@@ -10,7 +10,7 @@ export class HomeController {
 
     try {
 
-      return <HomeView title="My Testing Web Page" message="Welcome to my site!"/>;
+      return <HomeView title="Home - My Testing Web Site" message="Welcome to my site!"/>;
 
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);

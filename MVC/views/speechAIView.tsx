@@ -10,6 +10,7 @@ export function SpeechAIView({ title }: { title: string }) {
 
   useEffect(() => {
     
+    if (title) document.title = title;
     const cleanup = SpeechAIScript();
 
     return () => { 
@@ -19,25 +20,21 @@ export function SpeechAIView({ title }: { title: string }) {
 
   return (
     <>      
-      <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-        <div className="contenedor">
-          <h2>Speech to Text AI</h2>
-          <p>Press the button to start speaking and fill in the text field</p>
+      <h2>Speech to Text AI</h2>
+      <p>Press the button to start speaking and fill in the text field</p>
 
-          <div className="voice-container">
-            <textarea id="texto-resultado" placeholder="Your dictated text will appear here..." rows={8} cols={128} maxLength={976}></textarea>
-            <button id="btn-microfono" className="btn-mic">
+      <div className="voice-container">
+          <textarea id="texto-resultado" placeholder="Your dictated text will appear here..." rows={8} cols={128}></textarea>&nbsp;&nbsp;
+          <button id="btn-microfono" className="btn-mic">
               🎙️ <span id="estado-mic">Start Dictation</span>
-            </button>
-          </div>
-          <h2>Text to Speech AI</h2>
-          <p>Fill in the text field and listen to the result</p>
+          </button>
+      </div>
+      <h2>Text to Speech AI</h2>
+      <p>Fill in the text field and listen to the result</p>
 
-          <div className="voice-container">
-            <textarea id="texto-resultado" placeholder="Fill in the text field here to hear the result..." rows={8} cols={128} maxLength={976}></textarea>
-          </div>
-        </div>
-      </main>
+      <div className="voice-container">
+          <textarea id="texto-resultado" placeholder="Fill in the text field here to hear the result..." rows={8} cols={128}></textarea>
+      </div>
     </>
   );
 }

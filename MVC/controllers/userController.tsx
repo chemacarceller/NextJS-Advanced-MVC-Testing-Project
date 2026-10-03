@@ -17,7 +17,7 @@ export class UserController {
       const users = await this.userService.getUsersForList();
       const plainUsers = JSON.parse(JSON.stringify(users));
 
-      return <UserView usersList={plainUsers} title="User List" />;
+      return <UserView usersList={plainUsers} title="UserList - My Testing Web Site" />;
 
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);

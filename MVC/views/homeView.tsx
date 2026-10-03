@@ -8,6 +8,7 @@ export function HomeView({ title, message }: { title: string, message: string })
 
   useEffect(() => {
     
+    if (title) document.title = title;
     const cleanup = HomeScript();
 
     return () => { 
@@ -15,15 +16,10 @@ export function HomeView({ title, message }: { title: string, message: string })
     };
   });
   
-
   return (
-    <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <div className="home-layout">
-        <div className="contenedor">
-          <h1>{message}</h1>
-          <p>This page is being dynamically rendered from the Next.js server.</p>
-        </div>
-      </div>
-    </main>
+    <>
+      <h1>{message}</h1>
+      <p>This page is being dynamically rendered from the Next.js server.</p>
+    </>
   );
 }

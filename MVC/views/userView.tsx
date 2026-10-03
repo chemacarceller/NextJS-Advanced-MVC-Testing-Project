@@ -13,7 +13,8 @@ interface UserViewProps {
 export function UserView({ usersList, title }: UserViewProps) {
 
  useEffect(() => {
-    
+
+    if (title) document.title = title;
     const cleanup = UserScript();
 
     return () => { 
@@ -23,24 +24,22 @@ export function UserView({ usersList, title }: UserViewProps) {
   
   return (
     <>
-      <main style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-        <h1>{title}</h1>
-        <p>Team member management : </p>
-        
-        <button id="btn-toggle-status" data-showing-active="true" style={{ padding: "0.5rem 1rem", cursor: "pointer", marginBottom: "1rem" }} >
-          Show Inactive Users
-        </button>
+      <h1>User panel (<span id="users-count">{usersList.length}</span>)</h1>
+      <p>Team Member management :</p>
+      
+      <button id="btn-toggle-status" data-showing-active="true">
+        Show Inactive Users
+      </button>
 
-        <div id="users-container" style={{ display: 'grid', gap: '1rem', marginTop: '1rem', fontFamily: 'sans-serif' }} >
-          {usersList && usersList.map((user) => (
-            <div key={user.id} style={{ padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }} >
-              <strong>ID: {user.id} - NAME : {user.name}</strong>{' '}
-              — <span style={{ color: '#666' }}>{user.email}</span>{' '}
-              — <span style={{ color: '#666' }}>{user.role}</span>
-            </div>
-          ))}
+      <div id="users-container">
+      {usersList.map((user) => (
+        <div key={user.id}>
+          <strong>ID: {user.id} - NAME : {user.name}</strong> —{' '}
+          <span>{user.email}</span> —{' '}
+          <span>{user.role}</span>
         </div>
-      </main>
-    </>
+      ))}
+      </div>    
+    </>  
   );
 }

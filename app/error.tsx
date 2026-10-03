@@ -12,8 +12,14 @@ interface ErrorProps {
 
 export default function Page({ error, reset }: ErrorProps) {
 
+  const cause = error.cause as { statusCode?: number } | undefined;
+
+  const errorCode = cause?.statusCode || 500;
+  const message = error.message || "An unexpected error has occurred.";
+
   useEffect(() => {
     
+    document.title = 'Error ' + errorCode;
     const cleanup = ErrorScript({ error, reset }); 
 
     return () => { 
@@ -21,16 +27,12 @@ export default function Page({ error, reset }: ErrorProps) {
     };
   });
 
-  const cause = error.cause as { statusCode?: number } | undefined;
-
-  const errorCode = cause?.statusCode || 500;
-  const message = error.message || "An unexpected error has occurred.";
 
   return (
     <>
     <div className="error-layout">
-      <h1 className="error-titulo">Error {errorCode}</h1>
-      <p className="error-texto">{message}</p>
+      <h1>Error {errorCode}</h1>
+      <p>{message}</p>
     </div>
     </>
   );

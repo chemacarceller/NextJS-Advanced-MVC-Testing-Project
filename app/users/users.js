@@ -2,6 +2,7 @@ export function UserScript() {
 
     const btnToggle = document.getElementById('btn-toggle-status');
     const usersContainer = document.getElementById('users-container');
+    const usersCount = document.getElementById('users-count');
 
     btnToggle.addEventListener('click', async () => {
 
@@ -34,6 +35,9 @@ export function UserScript() {
                         </div>
                     `;
                 });
+
+                // Update the numeric counter in the h1 title
+                usersCount.textContent = result.data.length;
 
                 // Change the button's state and text for the next click
                 btnToggle.setAttribute('data-showing-active', targetActiveStatus.toString());

@@ -10,7 +10,7 @@ export class SpeechAIController {
 
     try {
 
-      return <SpeechAIView title="SpeechAI - My Testing Speech for AI" />;
+      return <SpeechAIView title="Speech AI - My Testing Web Site" />;
 
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
