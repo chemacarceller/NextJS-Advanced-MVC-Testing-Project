@@ -1,5 +1,4 @@
 export default function LayoutScript() {
-    window.LayoutID = Math.floor(Math.random() * 1000000000);
-
-    console.log("Testing layout.js... LayoutID = " + window.LayoutID );
+    if (window.LayoutID == undefined) window.LayoutID = window.LayoutID = Math.floor(Math.random() * 1000000000);
+    console.log(" => layout.js... LayoutID = " + window.LayoutID );
 }
