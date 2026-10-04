@@ -2,7 +2,7 @@
 
 // Importing css & client js files
 import './layout.css'; 
-import { LayoutScript } from './layout.js';
+import  LayoutScript from './layout.js';
 
 // Server components that replace <a href> and <script> tags
 import Link from 'next/link';
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
  useEffect(() => {
     document.title = "My Testing Nextjs Webpage";
-    const cleanup = LayoutScript();
+    const cleanup = (LayoutScript as any)();
 
     return () => { 
       if (typeof cleanup === 'function') { (cleanup as Function)(); }
@@ -31,7 +31,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="es">
       <body>
-        <Script strategy="beforeInteractive">{LayoutScript}</Script>
         <nav><Link href="/">Home</Link>&nbsp;&nbsp;&nbsp;<Link href="/users">Users</Link>&nbsp;&nbsp;&nbsp;<Link href="/speechAI">Speech-AI</Link></nav>
         <main>
           <div className="contenedor">
