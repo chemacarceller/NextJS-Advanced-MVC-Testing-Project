@@ -1,2 +1,3 @@
 export default function HomeScript() {
+    console.log("Testing home.js... " + Math.floor(Math.random() * 100000));
 }
