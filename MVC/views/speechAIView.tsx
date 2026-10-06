@@ -25,9 +25,8 @@ export function SpeechAIView({ title }: { title: string }) {
 
       <div className="voice-container">
           <textarea id="texto-resultado" placeholder="Your dictated text will appear here..." rows={8} cols={128}></textarea>&nbsp;&nbsp;
-          <button id="btn-microfono" className="btn-mic">
-              🎙️ <span id="estado-mic">Start Dictation</span>
-          </button>
+          <button id="btn-microfono" className="btn-mic"><span id="estado-mic">Start Dictation</span></button>&nbsp;&nbsp;&nbsp;
+          <button id="btn-send" class="btn-mic"><span id="estado-send">Send</span></button>
       </div>
       <h2>Text to Speech AI</h2>
       <p>Fill in the text field and listen to the result</p>
