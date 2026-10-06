@@ -1,7 +1,5 @@
 export function UserScript() {
 
-    console.log("Testing users.js... " + Math.floor(Math.random() * 100000));
-
     const btnToggle = document.getElementById('btn-toggle-status');
     const usersContainer = document.getElementById('users-container');
     const usersCount = document.getElementById('users-count');

@@ -3,10 +3,10 @@
 // Importing css & client js files
 import './layout.css'; 
 import  LayoutScript from './layout.js';
+import { GlobalProvider } from '@/app/context/GlobalContext';
 
 // Server components that replace <a href> and <script> tags
 import Link from 'next/link';
-import Script from 'next/script';
 
 // Bridge that allows safely embedding traditional JavaScript (Vanilla JS) code within a React component.
 import { useEffect } from 'react';
@@ -33,9 +33,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body>
         <nav><Link href="/">Home</Link>&nbsp;&nbsp;&nbsp;<Link href="/users">Users</Link>&nbsp;&nbsp;&nbsp;<Link href="/speechAI">Speech-AI</Link></nav>
         <main>
-          <div className="contenedor">
+          <div className="contenedor"><GlobalProvider>
             {children}
-          </div>
+          </GlobalProvider></div>
         </main>
         <footer>
           <p>© 2026 My Testing Web Site</p>
