@@ -2,14 +2,20 @@
 
 import { createContext, useContext, useRef } from 'react';
 
-const GlobalContext = createContext<string | null>(null);
+const GlobalContext = createContext<AssistantsConfig | null>(null);
+
+interface AssistantsConfig {
+  speechAID: string;
+  translatorAID: string;
+};
 
 export function GlobalProvider({ children }: { children: React.ReactNode }) {
   
-  const speechID = useRef<string>(crypto.randomUUID());
+  const speechAID = useRef<string>(crypto.randomUUID());
+  const translatorAID = useRef<string>(crypto.randomUUID());
 
   return (
-    <GlobalContext.Provider value={speechID.current}>
+    <GlobalContext.Provider value={{  speechAID: speechAID.current, translatorAID: translatorAID.current }}>
       {children}
     </GlobalContext.Provider>
   );
