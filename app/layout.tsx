@@ -1,41 +1,28 @@
-"use client";
-
 // Importing css & client js files
 import './layout.css'; 
-import  LayoutScript from './layout.js';
-import { GlobalProvider } from '@/app/context/GlobalContext';
+import LayoutClientComponent from './LayoutClientComponent';
 
 // Server components that replace <a href> and <script> tags
 import Link from 'next/link';
 
-// Bridge that allows safely embedding traditional JavaScript (Vanilla JS) code within a React component.
-import { useEffect } from 'react';
+export const metadata = {
+  title: "My Testing Nextjs Webpage",
+  description: "Test page in Next.js",
+};
 
-// TypeScript definition to specify the data types the RootLayout component is allowed to receive.
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-
 export default function RootLayout({ children }: RootLayoutProps) {
-
- useEffect(() => {
-    document.title = "My Testing Nextjs Webpage";
-    const cleanup = (LayoutScript as any)();
-
-    return () => { 
-      if (typeof cleanup === 'function') { (cleanup as Function)(); }
-    };
-  });
-  
   return (
     <html lang="es" suppressHydrationWarning>
       <body>
         <nav><Link href="/">Home</Link>&nbsp;&nbsp;&nbsp;<Link href="/users">Users</Link>&nbsp;&nbsp;&nbsp;<Link href="/speechAI">Speech-AI</Link></nav>
         <main>
-          <div className="contenedor"><GlobalProvider>
+          <div className="contenedor"><LayoutClientComponent>
             {children}
-          </GlobalProvider></div>
+          </LayoutClientComponent></div>
         </main>
         <footer>
           <p>© 2026 My Testing Web Site</p>
