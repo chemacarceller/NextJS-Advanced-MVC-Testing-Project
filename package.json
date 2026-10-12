@@ -7,18 +7,6 @@
     "build": "next build",
     "start": "next start -p 5000"
   },
-  "overrides": {
-    "braces": "^3.0.3",
-    "eslint-plugin-import": {
-      "eslint": "$eslint"
-    },
-    "eslint-plugin-jsx-a11y": {
-      "eslint": "$eslint"
-    },
-    "eslint-plugin-react": {
-      "eslint": "$eslint"
-    }
-  },
   "dependencies": {
     "next": "^16.3.8",
     "ollama": "^0.6.4",

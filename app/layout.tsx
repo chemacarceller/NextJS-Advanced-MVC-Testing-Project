@@ -29,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   });
   
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body>
         <nav><Link href="/">Home</Link>&nbsp;&nbsp;&nbsp;<Link href="/users">Users</Link>&nbsp;&nbsp;&nbsp;<Link href="/speechAI">Speech-AI</Link></nav>
         <main>

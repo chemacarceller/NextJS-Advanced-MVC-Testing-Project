@@ -13,12 +13,17 @@ export function SpeechAIView({ title }: { title: string }) {
   const inputMessageRef = useRef<HTMLTextAreaElement>(null);
   const outputResponseRef = useRef<HTMLTextAreaElement>(null);
   const btnSendRef = useRef<HTMLButtonElement>(null);
+  const btnVoiceRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     
     if (title) document.title = title;
 
-    const cleanup = SpeechAIScript(speechAID, inputMessageRef.current, outputResponseRef.current, btnSendRef.current);
+    const SpeechRecognition = typeof window !== 'undefined' 
+    ? ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition) 
+    : null;
+    
+    const cleanup = SpeechAIScript(speechAID, inputMessageRef.current, outputResponseRef.current, btnSendRef.current, btnVoiceRef.current, SpeechRecognition);
 
     return () => { 
       if (typeof cleanup === 'function') { (cleanup as Function)(); }
@@ -32,7 +37,7 @@ export function SpeechAIView({ title }: { title: string }) {
 
       <div className="voice-container">
           <textarea ref={inputMessageRef} placeholder="Your dictated text will appear here..." rows={8} cols={128}></textarea>&nbsp;&nbsp;
-          <button id="btn-microfono" className="btn-mic"><span id="estado-mic">Start Dictation</span></button>&nbsp;&nbsp;&nbsp;
+          <button ref={btnVoiceRef} className="btn-mic"><span id="estado-mic">Start Dictation</span></button>&nbsp;&nbsp;&nbsp;
           <button ref={btnSendRef} className="btn-mic"><span id="estado-send">Send</span></button>
       </div>
       <h2>Text to Speech AI</h2>

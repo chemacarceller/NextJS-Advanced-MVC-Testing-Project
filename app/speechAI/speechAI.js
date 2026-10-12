@@ -1,7 +1,7 @@
 import IAgent from '../../src/agents/iAgent.js';
 import SpeechAgent from '../../src/agents/speechAgent.js';
 
-export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend) {
+export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend, btnVoice, SpeechRecognition) {
 
       console.log(" speechAI.js ==>  speech ID = " + speechAID);
 
@@ -33,7 +33,7 @@ export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend)
 
       let lastReadPosition = 0;
 
-      const speechAgent = new SpeechAgent();        
+      const speechAgent = new SpeechAgent(SpeechRecognition);        
       outputResponse.addEventListener('input', (e) => {
 
             const fullText = outputResponse.value;
@@ -63,5 +63,10 @@ export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend)
       // If the user deletes text manually, we reset the read pointer.
       outputResponse.addEventListener('keydown', (e) => {
             if (e.key === 'Backspace' || e.key === 'Delete') setTimeout(() => { lastReadPosition = outputResponse.value.length; }, 10);
+      });
+
+
+      btnVoice.addEventListener('click', () => {
+            speechAgent.hear(inputMessage, btnVoice);
       });
 }
