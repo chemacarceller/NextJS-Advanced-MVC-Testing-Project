@@ -20,7 +20,7 @@ export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend,
                   return;
             }
   
-            outputResponse.value = await iAgent.sendMessageToChat(sessionStorage.getItem('speechAID'), message);
+            outputResponse.value = await iAgent.sendMessageToChat(sessionStorage.getItem('speechAID'), message, inputMessage, btnSend, outputResponse);
             outputResponse.value += " ";
             outputResponse.dispatchEvent(eventoInput);
 

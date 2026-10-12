@@ -27,7 +27,7 @@ export default class IAgent {
     }
 
 
-    async sendMessageToChat(id, text) {
+    async sendMessageToChat(id, text, inputMessage, btnSend, outputResponse) {
 
         try {
     
