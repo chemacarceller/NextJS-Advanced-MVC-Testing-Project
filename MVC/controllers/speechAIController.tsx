@@ -1,20 +1,12 @@
-import { SpeechAIView } from "../views/speechAIView";
+import { SpeechAIView } from "@/MVC/views/speechAIView";
 
-export class SpeechAIController {
+export function SpeechAIController() {
+  try {
 
-  constructor() {
-    this.start = this.start.bind(this);
-  }
+    return <SpeechAIView title="Speech AI - My Testing Web Site" />;
 
-  async start() {
-
-    try {
-
-      return <SpeechAIView title="Speech AI - My Testing Web Site" />;
-
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      throw new Error(message); 
-    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(message); 
   }
 }

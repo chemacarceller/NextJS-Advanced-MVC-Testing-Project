@@ -1,5 +1,5 @@
 import { SpeechAIController } from "@/MVC/controllers/speechAIController";
 
-export default async function Page() {
-  return await new SpeechAIController().start(); 
+export default function Page() {
+  return <SpeechAIController />; 
 }

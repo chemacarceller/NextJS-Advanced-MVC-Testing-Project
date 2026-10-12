@@ -6,9 +6,12 @@ export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend,
       console.log(" speechAI.js ==>  speech ID = " + speechAID);
 
       const iAgent = new IAgent();
+      const speechAgent = new SpeechAgent(SpeechRecognition);        
       const eventoInput = new Event('input', { bubbles: true });
+      let lastReadPosition = 0;
+      let timeoutKeydown;
 
-      btnSend.addEventListener('click', async () => {
+      const handleSendClick = async () => {
 
             outputResponse.value = '';
             outputResponse.dispatchEvent(eventoInput);
@@ -23,19 +26,9 @@ export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend,
             outputResponse.value = await iAgent.sendMessageToChat(sessionStorage.getItem('speechAID'), message, inputMessage, btnSend, outputResponse);
             outputResponse.value += " ";
             outputResponse.dispatchEvent(eventoInput);
+      };
 
-      });
-
-      iAgent.initializeAgent();
-
-
-
-
-      let lastReadPosition = 0;
-
-      const speechAgent = new SpeechAgent(SpeechRecognition);        
-      outputResponse.addEventListener('input', (e) => {
-
+      const handleOutputInput = (e) => {
             const fullText = outputResponse.value;
 
             lastReadPosition = fullText.length > lastReadPosition ? lastReadPosition : fullText.length;
@@ -49,24 +42,40 @@ export function SpeechAIScript(speechAID, inputMessage, outputResponse, btnSend,
             const lastCharacter = fullText.slice(-1);
 
             if ([' ', '.', ',', '\n'].includes(lastCharacter)) {
-    
-            const newFragment = fullText.substring(lastReadPosition).trim();
+                  const newFragment = fullText.substring(lastReadPosition).trim();
 
-            if (newFragment.length > 0) speechAgent.speak(newFragment);
+                  if (newFragment.length > 0) speechAgent.speak(newFragment);
 
-            // Updates the pointer to track how far we have read
-            lastReadPosition = fullText.length;
-
+                  // Updates the pointer to track how far we have read
+                  lastReadPosition = fullText.length;
             }
-      });
+      };
 
-      // If the user deletes text manually, we reset the read pointer.
-      outputResponse.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' || e.key === 'Delete') setTimeout(() => { lastReadPosition = outputResponse.value.length; }, 10);
-      });
+      const handleOutputKeydown = (e) => {
+            if (e.key === 'Backspace' || e.key === 'Delete') {
+                  timeoutKeydown = setTimeout(() => { lastReadPosition = outputResponse.value.length; }, 10);
+            }
+      };
 
-
-      btnVoice.addEventListener('click', () => {
+      const handleVoiceClick = () => {
             speechAgent.hear(inputMessage, btnVoice);
-      });
+      };
+
+      btnSend.addEventListener('click', handleSendClick);
+      outputResponse.addEventListener('input', handleOutputInput);
+      outputResponse.addEventListener('keydown', handleOutputKeydown);
+      btnVoice.addEventListener('click', handleVoiceClick);
+
+      iAgent.initializeAgent();
+
+      return () => {
+            btnSend.removeEventListener('click', handleSendClick);
+            outputResponse.removeEventListener('input', handleOutputInput);
+            outputResponse.removeEventListener('keydown', handleOutputKeydown);
+            btnVoice.removeEventListener('click', handleVoiceClick);
+      
+            if (timeoutKeydown) clearTimeout(timeoutKeydown);
+      
+            speechAgent.destroy(); 
+      };
 }
